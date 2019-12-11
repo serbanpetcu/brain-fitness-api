@@ -1,4 +1,4 @@
-# Project name 
+# Teacher Brain Fitness
 
 [![GitHub contributors](https://img.shields.io/github/contributors/code4romania/standard-repo-template.svg?style=for-the-badge)](https://github.com/code4romania/standard-repo-template/graphs/contributors) [![GitHub last commit](https://img.shields.io/github/last-commit/code4romania/standard-repo-template.svg?style=for-the-badge)](https://github.com/code4romania/standard-repo-template/commits/master) [![License: MPL 2.0](https://img.shields.io/badge/license-MPL%202.0-brightgreen.svg?style=for-the-badge)](https://opensource.org/licenses/MPL-2.0)
 
@@ -20,13 +20,18 @@ You can also list any pending features and planned improvements for the project 
 
 ### Programming languages
 
+- Python
+
 ### Platforms
 
-### Frontend framework
+- Flask
+
 
 ### Package managers
 
 ### Database technology & provider
+
+- MySQL
 
 ## Repos and projects
 
@@ -34,21 +39,66 @@ Mention all related repos and projects.
 
 ## Deployment
 
-Guide users through getting your code up and running on their own system. In this section you can talk about:
-1. Installation process
-2. Software dependencies
-3. Latest releases
-4. API references
+### Fork this repo
 
-Describe and show how to build your code and run the tests. 
+For this repo by clicking Fork on github.
 
-## Feedback
+### Clone your fork
 
-* Request a new feature on GitHub.
-* Vote for popular feature requests.
-* File a bug in GitHub Issues.
-* Email us with other feedback contact@code4.ro
+    $ git clone https://github.com/[your-username]/brain-fitness-api.git
+    $ cd brain-fitness-api
 
+### Initialize a virtualenv
+
+    $ pip install virtualenv
+    $ virtualenv venv
+    $ . venv/bin/activate
+
+### Install dependencies
+
+    $ pip install -r requirements.txt
+    
+
+### Setup config.ini
+
+Create a new file inside the `brain-fitness-api/` folder named `config.ini` and copy-paste the configuration from the `config.example.ini` file.
+
+
+### Create the database
+
+    $ export FLASK_APP=run.py
+    $ flask db upgrade
+
+### Run the app
+
+    $ python run.py
+
+Or:
+
+    $ flask run
+
+By default, the app will run at `brainfitness.code4:8282`. 
+Update your `/etc/hosts` to point to 127.0.0.1 for `brainfitness.code4` so that your computer can access the virtual host.
+
+    127.0.0.1       brainfitness.code4
+    
+
+### Updating database (Adding/Editing/Removing columns)
+
+Steps required:
+- Modify model file (`app/models/[model_name].py`) and add/edit/remove the columns you want
+- Generate migration script: 
+```
+    $ flask db migrate
+```
+- Run migration (upgrade)
+```
+    $ flask db upgrade
+```
+
+**USEFUL**: You can edit the migration script located in `migrations/versions/[version].py` and add a descriptive message for that migration.
+To do this, just replace "empty message" with your message (on the first line).
+ 
 ## License 
 
 This project is licensed under the MPL 2.0 License - see the [LICENSE](LICENSE) file for details
