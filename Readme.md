@@ -41,7 +41,7 @@ Mention all related repos and projects.
 
 ### Fork this repo
 
-For this repo by clicking Fork on github.
+Fork this repo by clicking Fork on github.
 
 ### Clone your fork
 
@@ -58,13 +58,31 @@ For this repo by clicking Fork on github.
 
     $ pip install -r requirements.txt
     
+### Create the MySQL database
+
+Please create the database before proceeding. You will need the database credentials in the next step.
+
+**Credentials you will need**:
+- Database name
+- Database username
+- Database password
+- Database address (if it is on your local machine with default settings, the address is `127.0.0.1:3306`) 
 
 ### Setup config.ini
 
 Create a new file inside the `brain-fitness-api/` folder named `config.ini` and copy-paste the configuration from the `config.example.ini` file.
 
+In the freshly created `config.ini` make sure you set the database connection string (`SQLALCHEMY_DATABASE_URI`) correctly.
 
-### Create the database
+If your database user is `admin`, your password is `password` and your database name is `code4_brainfitness`, the connection string will look like this:
+
+```ini
+SQLALCHEMY_DATABASE_URI = mysql+pymysql://admin:password@127.0.0.1:3306/code4_brainfitness
+```
+
+You can also adjust any constant from config.ini to match your needs. This file will not be pushed on the repo.
+
+### Upgrading the database
 
     $ export FLASK_APP=run.py
     $ flask db upgrade
